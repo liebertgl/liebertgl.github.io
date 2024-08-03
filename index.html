@@ -1,9 +1,61 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Example</title>
-    </head>
-    <body>
-        <p>This is an example of a simple HTML page with one paragraph.</p>
-    </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loadstring Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #FFF;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .output {
+            margin-top: 20px;
+            white-space: pre-wrap; /* Preserves whitespace and line breaks */
+            background-color: #f8f9fa;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Loadstring Generator</h1>
+        <input type="text" id="urlInput" placeholder="Enter URL here" />
+        <button onclick="generateLoadstring()">Generate Loadstring</button>
+        <div id="output" class="output"></div>
+    </div>
+
+    <script>
+        function generateLoadstring() {
+            var url = document.getElementById('urlInput').value;
+            if (url.trim() === '') {
+                document.getElementById('output').innerText = 'Please enter a URL.';
+                return;
+            }
+            var loadstringCode = `loadstring(game:HttpGet("${url}"))()`;
+            document.getElementById('output').innerText = loadstringCode;
+        }
+    </script>
+</body>
 </html>
