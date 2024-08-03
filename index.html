@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Loadstringer For Roblox</title>
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/site.webmanifest">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
     <meta name="description" content="Roblox Loadstringer Tools!. You Can Generate Loadstring Using URL And Copy it (Or Download)!" />
     <style>
         body {
@@ -45,6 +45,9 @@
             cursor: pointer;
             font-size: 16px;
             margin-top: 10px;
+            display: block;
+            width: 100%;
+            text-align: center;
         }
         button:hover {
             background-color: #0056b3;
@@ -64,6 +67,12 @@
         #copyButton:hover {
             background-color: #218838;
         }
+        #downloadButton {
+            background-color: #ffc107;
+        }
+        #downloadButton:hover {
+            background-color: #e0a800;
+        }
     </style>
 </head>
 <body>
@@ -73,6 +82,7 @@
         <button onclick="generateLoadstring()">Generate Loadstring</button>
         <div id="output" class="output"></div>
         <button id="copyButton" onclick="copyToClipboard()">Copy to Clipboard</button>
+        <button id="downloadButton" onclick="downloadFile()">Download to File</button>
     </div>
 
     <script>
@@ -89,14 +99,27 @@
         function copyToClipboard() {
             var outputText = document.getElementById('output').innerText;
             if (outputText.trim() === '') {
-                toast('No code to copy.');
+                alert('No code to copy.');
                 return;
             }
             navigator.clipboard.writeText(outputText).then(function() {
-                toast('Code copied to clipboard!');
+                alert('Code copied to clipboard!');
             }, function(err) {
-                toast('Failed to copy code: ' + err);
+                alert('Failed to copy code: ' + err);
             });
+        }
+
+        function downloadFile() {
+            var outputText = document.getElementById('output').innerText;
+            if (outputText.trim() === '') {
+                alert('No code to download.');
+                return;
+            }
+            var blob = new Blob([outputText], { type: 'text/plain' });
+            var link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'loadstring.txt';
+            link.click();
         }
     </script>
 </body>
