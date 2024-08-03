@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loadstring Generator</title>
+    <title>Loadstringer For Roblox</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -84,13 +84,13 @@
         function copyToClipboard() {
             var outputText = document.getElementById('output').innerText;
             if (outputText.trim() === '') {
-                alert('No code to copy.');
+                toast('No code to copy.');
                 return;
             }
             navigator.clipboard.writeText(outputText).then(function() {
-                alert('Code copied to clipboard!');
+                toast('Code copied to clipboard!');
             }, function(err) {
-                alert('Failed to copy code: ' + err);
+                toast('Failed to copy code: ' + err);
             });
         }
     </script>
