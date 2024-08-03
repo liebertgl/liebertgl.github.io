@@ -39,6 +39,7 @@
             border-radius: 4px;
             cursor: pointer;
             font-size: 16px;
+            margin-top: 10px;
         }
         button:hover {
             background-color: #0056b3;
@@ -52,25 +53,45 @@
             white-space: pre-wrap;
             word-wrap: break-word;
         }
+        #copyButton {
+            background-color: #28a745;
+        }
+        #copyButton:hover {
+            background-color: #218838;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1 style="text-align: center; margin-bottom: 20px;">Loadstringer For Roblox</h1>
-        <input type="text" id="urlInput" placeholder="Enter The URL Here!" />
+        <h1 style="text-align: center; margin-bottom: 20px;">Loadstring Generator</h1>
+        <input type="text" id="urlInput" placeholder="Enter URL here" />
         <button onclick="generateLoadstring()">Generate Loadstring</button>
         <div id="output" class="output"></div>
+        <button id="copyButton" onclick="copyToClipboard()">Copy to Clipboard</button>
     </div>
 
     <script>
         function generateLoadstring() {
             var url = document.getElementById('urlInput').value;
             if (url.trim() === '') {
-                document.getElementById('output').innerText = 'Please enter a URL of the script.';
+                document.getElementById('output').innerText = 'Please enter a URL.';
                 return;
             }
             var loadstringCode = `loadstring(game:HttpGet("${url}"))()`;
             document.getElementById('output').innerText = loadstringCode;
+        }
+
+        function copyToClipboard() {
+            var outputText = document.getElementById('output').innerText;
+            if (outputText.trim() === '') {
+                alert('No code to copy.');
+                return;
+            }
+            navigator.clipboard.writeText(outputText).then(function() {
+                alert('Code copied to clipboard!');
+            }, function(err) {
+                alert('Failed to copy code: ' + err);
+            });
         }
     </script>
 </body>
